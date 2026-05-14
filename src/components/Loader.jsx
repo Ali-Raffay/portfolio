@@ -56,7 +56,7 @@ export const Loader = ({ onComplete }) => {
         <motion.div
           className="text-4xl md:text-5xl font-display font-800 text-center"
           style={{
-            background: "linear-gradient(135deg, #f1f0ff, #7c3aed)",
+            background: "linear-gradient(135deg, #f1f0ff, #3C4245)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",

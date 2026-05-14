@@ -1,121 +1,49 @@
-import React, { useRef, useEffect, useState, useMemo } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Points, PointMaterial, TorusKnot } from '@react-three/drei'
-import * as THREE from 'three'
-import gsap from 'gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
-
-const MainObject = ({ mousePosition }) => {
-  const torusRef = useRef(null)
-
-  useFrame(() => {
-    if (torusRef.current) {
-      torusRef.current.rotation.y += 0.003
-      torusRef.current.rotation.x += 0.001
-
-      if (mousePosition.x && mousePosition.y) {
-        const x = (mousePosition.y / window.innerHeight - 0.5) * 0.3
-        const y = (mousePosition.x / window.innerWidth - 0.5) * -0.3
-        torusRef.current.rotation.x += x * 0.01
-        torusRef.current.rotation.y += y * 0.01
-      }
-    }
-  })
-
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
-  const scale = isMobile ? 0.7 : 1
-
-  return (
-    <TorusKnot ref={torusRef} args={[1, 0.3, 200, 32]} scale={scale}>
-      <meshStandardMaterial
-        color="#7c3aed"
-        wireframe={false}
-        roughness={0.1}
-        metalness={0.8}
-        emissive="#3b0764"
-        emissiveIntensity={0.3}
-      />
-    </TorusKnot>
-  )
-}
-
-const ParticleSystem = () => {
-  const points = useMemo(() => {
-    const positions = new Float32Array(80 * 3)
-    for (let i = 0; i < 80; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 8
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 8
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 8
-    }
-    return positions
-  }, [])
-
-  const pointsRef = useRef(null)
-
-  useFrame(() => {
-    if (pointsRef.current) {
-      pointsRef.current.rotation.y += 0.0001
-    }
-  })
-
-  return (
-    <Points ref={pointsRef} positions={points} stride={3} frustumCulled={false}>
-      <PointMaterial
-        transparent
-        color="#7c3aed"
-        size={0.04}
-        sizeAttenuation
-        depthWrite={false}
-      />
-    </Points>
-  )
-}
-
-const Lights = () => {
-  return (
-    <>
-      <ambientLight intensity={0.4} />
-      <pointLight position={[5, 5, 5]} intensity={1.5} color="#7c3aed" />
-      <pointLight position={[-5, -5, -3]} intensity={0.8} color="#06b6d4" />
-    </>
-  )
-}
-
-const SceneContent = ({ mousePosition }) => {
-  return (
-    <>
-      <Lights />
-      <ParticleSystem />
-      <MainObject mousePosition={mousePosition} />
-    </>
-  )
-}
+import React, { useEffect, useRef } from 'react'
 
 export const ThreeScene = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const containerRef = useRef(null)
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
+    // Load the Spline viewer script
+    const script = document.createElement('script')
+    script.type = 'module'
+    script.src = 'https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js'
+    document.head.appendChild(script)
+
+    script.onload = () => {
+      if (containerRef.current && !containerRef.current.querySelector('spline-viewer')) {
+        const viewer = document.createElement('spline-viewer')
+        viewer.setAttribute('url', 'https://prod.spline.design/YLUO2m8F98Pj2vMp/scene.splinecode')
+        viewer.style.width = '100%'
+        viewer.style.height = '100%'
+        viewer.style.display = 'flex'
+        viewer.style.alignItems = 'center'
+        viewer.style.justifyContent = 'center'
+        containerRef.current.appendChild(viewer)
+      }
     }
 
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
+    return () => {
+      if (document.head.contains(script)) {
+        document.head.removeChild(script)
+      }
+    }
   }, [])
-
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
 
   return (
     <div className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none">
-      <Canvas
-        camera={{ position: [0, 0, 5], fov: 45 }}
-        style={{ width: '100%', height: '100%' }}
-      >
-        <SceneContent mousePosition={mousePosition} />
-      </Canvas>
+      <div
+        ref={containerRef}
+        className="w-full h-full"
+        style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center',
+          transform: 'translateX(10%)' 
+        }}
+      />
+      {/* Overlay to hide Spline watermark */}
+      <div className="absolute bottom-0 right-0 w-32 h-12 bg-black z-10" />
     </div>
   )
 }
-

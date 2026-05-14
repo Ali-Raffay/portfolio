@@ -143,8 +143,8 @@ export const ProjectsSection = () => {
                 transition={{ duration: 0.8 }}
               />
               <p className="text-gray-400 mt-4 text-lg max-w-2xl ml-10">
-                A curated collection of projects that showcase my expertise in
-                building full-stack applications with modern technologies.
+                Projects coming soon — check back for case studies on automation
+                systems, funnels, and workflow builds.
               </p>
             </motion.div>
           </div>
@@ -192,10 +192,10 @@ export const ProjectsSection = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               {[
-                { label: 'Projects Completed', value: '15+' },
-                { label: 'Technologies Used', value: '20+' },
-                { label: 'GitHub Contributions', value: '500+' },
-                { label: 'Lines of Code', value: '50K+' },
+                { label: 'Workflows Shipped', value: '400+' },
+                { label: 'Revision Reduction', value: '35%' },
+                { label: 'Response Time Improvement', value: '70%' },
+                { label: 'Show-up Rate Lift', value: '18–25%' },
               ].map((stat, index) => (
                 <motion.div
                   key={stat.label}

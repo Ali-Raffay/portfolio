@@ -4,11 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#7c3aed',
-        secondary: '#06b6d4',
-        dark: '#0a0a0f',
-        surface: '#13131a',
-        card: '#1a1a2e',
+        primary: '#3C4245',
+        secondary: '#5F6769',
+        dark: '#000000',
+        surface: '#1a1d1e',
+        card: '#2a2e30',
       },
       fontFamily: {
         display: ['Syne', 'sans-serif'],

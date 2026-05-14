@@ -48,19 +48,10 @@ export const AboutSection = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.4 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            className="space-y-6"
           >
-            {/* Profile Image */}
-            <div className="flex items-center justify-center md:justify-start">
-              <div className="relative w-64 h-64 md:w-48 md:h-48 rounded-full bg-gradient-to-br from-primary to-secondary p-1">
-                <div className="w-full h-full rounded-full bg-dark flex items-center justify-center text-5xl font-display font-800 text-primary">
-                  {personalInfo.name.split(' ').map((word) => word[0]).join('')}
-                </div>
-              </div>
-            </div>
-
             {/* About Content */}
-            <div className="md:col-span-2 flex flex-col justify-center">
+            <div className="flex flex-col justify-center">
               <h3 className="text-2xl md:text-3xl font-display font-700 mb-2 text-gray-100">
                 {personalInfo.name}
               </h3>
@@ -87,16 +78,6 @@ export const AboutSection = () => {
                 </div>
               </div>
 
-              {/* Download Resume */}
-              <motion.a
-                href={personalInfo.resumeUrl}
-                download
-                className="w-fit px-6 py-2 border border-primary text-primary rounded-lg hover:bg-primary/10 transition-colors cursor-none font-medium"
-                whileHover={{ scale: 1.05 }}
-                data-cursor="hover"
-              >
-                Download Resume
-              </motion.a>
             </div>
           </motion.div>
         )

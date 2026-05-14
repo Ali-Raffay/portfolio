@@ -212,7 +212,7 @@ export const ContactForm = () => {
         style={{
           background: isSubmitting
             ? undefined
-            : 'linear-gradient(135deg, #7c3aed, #06b6d4)',
+            : 'linear-gradient(135deg, #3C4245, #5F6769)',
           height: '52px',
         }}
         whileHover={!isSubmitting ? { scale: 1.02 } : {}}

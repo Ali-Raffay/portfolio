@@ -4,7 +4,7 @@ import { Link as ScrollLink } from 'react-scroll'
 import { personalInfo } from '../data/portfolioData'
 
 export const HeroSection = () => {
-  const roles = ['Full Stack Developer', 'UI/UX Enthusiast', 'Problem Solver']
+  const roles = ['GHL Specialist', 'Automation Expert', 'Workflow Architect']
   const [currentRole, setCurrentRole] = useState(0)
   const [displayText, setDisplayText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
@@ -57,15 +57,13 @@ export const HeroSection = () => {
       id="home"
       className="relative min-h-screen w-full pt-32 pb-20 px-4 md:px-8 z-10 flex items-center"
     >
-      <div className="max-w-7xl mx-auto w-full">
+      <div className="max-w-7xl mx-auto w-full relative z-10">
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
+          className="flex flex-col items-start text-left"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/* Left Column */}
-          <div className="flex flex-col justify-center">
             {/* Available Badge */}
             <motion.div
               variants={itemVariants}
@@ -78,66 +76,33 @@ export const HeroSection = () => {
             {/* Main Heading */}
             <motion.h1
               variants={itemVariants}
-              className="text-5xl md:text-6xl lg:text-7xl font-display font-800 mb-4 leading-tight"
+              className="text-3xl md:text-4xl lg:text-5xl font-display font-800 mb-4 leading-tight"
               style={{
-                background: 'linear-gradient(135deg, #f1f0ff, #7c3aed)',
+                background: 'linear-gradient(135deg, #f1f0ff, #3C4245)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
               }}
             >
-              Hi, I'm {personalInfo.name}
+              Hi, I'm Ali Raffay
             </motion.h1>
 
             {/* Typewriter Line */}
             <motion.p
               variants={itemVariants}
-              className="text-xl md:text-2xl font-body text-secondary mb-6 h-10"
+              className="text-lg md:text-xl font-body text-secondary mb-6 h-8"
             >
-              I build <span className="text-primary font-semibold">{displayText}</span>
+              I deliver <span className="text-primary font-semibold">{displayText}</span>
               <span className="animate-pulse">|</span>
             </motion.p>
 
             {/* Bio */}
             <motion.p
               variants={itemVariants}
-              className="text-gray-400 text-lg leading-relaxed mb-8 max-w-md"
+              className="text-white text-sm leading-relaxed mb-8 max-w-lg"
             >
               {personalInfo.bio}
             </motion.p>
-
-            {/* CTA Buttons */}
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-4 mb-8"
-            >
-              <ScrollLink
-                to="projects"
-                smooth
-                duration={500}
-                className="cursor-none"
-                data-cursor="hover"
-              >
-                <motion.button
-                  className="px-8 py-3 bg-gradient-to-r from-primary to-secondary text-white font-medium rounded-lg hover:opacity-90 transition-opacity"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  View My Work
-                </motion.button>
-              </ScrollLink>
-
-              <motion.a
-                href={personalInfo.resumeUrl}
-                download
-                className="px-8 py-3 border-2 border-primary text-primary font-medium rounded-lg hover:bg-primary/10 transition-colors cursor-none"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                data-cursor="hover"
-              >
-                Download CV
-              </motion.a>
-            </motion.div>
 
             {/* Social Links */}
             <motion.div variants={itemVariants} className="flex gap-4">
@@ -170,15 +135,6 @@ export const HeroSection = () => {
                 <span className="text-lg">📧</span>
               </motion.a>
             </motion.div>
-          </div>
-
-          {/* Right Column - 3D Object Space */}
-          <motion.div
-            variants={itemVariants}
-            className="hidden md:flex items-center justify-center"
-          >
-            {/* 3D object from ThreeScene floats here */}
-          </motion.div>
         </motion.div>
 
         {/* Scroll Indicator */}
